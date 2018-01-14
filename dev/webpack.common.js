@@ -4,13 +4,13 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const projectRoot = path.resolve(__dirname, '../');
-const resourcesFolder = path.resolve(projectRoot, 'resources');
+const dist = path.resolve(projectRoot, 'dist');
 const src = path.resolve(projectRoot, 'src');
-const indexHtmlFile = path.resolve(projectRoot, 'index.html');
+const indexHtmlFile = path.resolve(dist, 'index.html');
 
 const thingsToDelete = [
   indexHtmlFile,
-  resourcesFolder
+  dist
 ];
 const cleanWebpackOptions = {
   root:     projectRoot,
@@ -29,11 +29,7 @@ module.exports = {
   },
   output: {
     filename: '[name].[hash].bundle.js',
-    path: resourcesFolder
-  },
-  devServer: {
-    contentBase: projectRoot,
-    index: indexHtmlFile
+    path: dist
   },
   module: {
     rules: [{
