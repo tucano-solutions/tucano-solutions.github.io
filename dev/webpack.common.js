@@ -6,10 +6,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const projectRoot = path.resolve(__dirname, '../');
 const outputFolder = projectRoot;
 const cleanWebpackRoot = path.resolve(projectRoot, '../');
+const src = path.resolve(__dirname, '../src');
 
 const cleanWebpackOptions = {
   root:     cleanWebpackRoot,
-  exclude:  ['dev, src, .gitignore, CNAME', 'package*.json', 'README.md'],
+  exclude:  [__dirname, src, '.gitignore', 'CNAME', 'package*.json', 'README.md'],
   verbose:  true,
   dry: true
 }
@@ -20,7 +21,7 @@ const extractSass = new ExtractTextPlugin({
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: path.resolve(src, 'index.js')
   },
   output: {
     filename: '[name].[hash].bundle.js',
@@ -69,7 +70,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([projectRoot]),
     new HtmlWebpackPlugin({
-      template: 'src/index.pug'
+      template: path.resolve(src, 'index.pug')
     }),
     extractSass
   ]
