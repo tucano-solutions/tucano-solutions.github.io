@@ -21,8 +21,7 @@ const cleanWebpackOptions = {
 }
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css",
-    path: resourcesFolder
+    filename: "[name].[contenthash].css"
 });
 
 module.exports = {
@@ -77,9 +76,10 @@ module.exports = {
     }]
   },
   plugins: [
-    new CleanWebpackPlugin([foldersToDelete], cleanWebpackOptions),
+    new CleanWebpackPlugin(foldersToDelete, cleanWebpackOptions),
     new HtmlWebpackPlugin({
-      template: path.resolve(src, 'index.pug')
+      template: path.resolve(src, 'index.pug'),
+      filename: path.resolve(projectRoot, 'index.html')
     }),
     extractSass
   ]
