@@ -39,7 +39,10 @@ module.exports = {
         }, {
           loader: "postcss-loader",
           options: {
-            sourceMap: true
+            sourceMap: true,
+            config: {
+              path: path.resolve(__dirname, 'postcss.config.js')
+            }
           }
         }, {
           loader: "sass-loader",
@@ -68,7 +71,7 @@ module.exports = {
     }]
   },
   plugins: [
-    new CleanWebpackPlugin([projectRoot]),
+    new CleanWebpackPlugin([projectRoot], cleanWebpackOptions),
     new HtmlWebpackPlugin({
       template: path.resolve(src, 'index.pug')
     }),
