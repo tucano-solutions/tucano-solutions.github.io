@@ -5,18 +5,24 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const projectRoot = path.resolve(__dirname, '../');
 const outputFolder = projectRoot;
+const resourcesFolder = path.resolve(projectRoot, 'resources');
 const cleanWebpackRoot = path.resolve(projectRoot, '../');
 const src = path.resolve(__dirname, '../src');
 
+const foldersToDelete = [
+  path.resolve(projectRoot, 'index.html'),
+  path.resolve(projectRoot, 'resources'),
+]
 const cleanWebpackOptions = {
-  root:     cleanWebpackRoot,
-  exclude:  [__dirname, src, '.gitignore', 'CNAME', 'package*.json', 'README.md'],
+  root:     projectRoot,
+  exclude:  [],
   verbose:  true,
   dry: true
 }
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].[contenthash].css"
+    filename: "[name].[contenthash].css",
+    path: resourcesFolder
 });
 
 module.exports = {
@@ -25,7 +31,7 @@ module.exports = {
   },
   output: {
     filename: '[name].[hash].bundle.js',
-    path: path.resolve(__dirname, `${outputFolder}`)
+    path: resourcesFolder
   },
   module: {
     rules: [{
@@ -71,7 +77,7 @@ module.exports = {
     }]
   },
   plugins: [
-    new CleanWebpackPlugin([projectRoot], cleanWebpackOptions),
+    new CleanWebpackPlugin([foldersToDelete], cleanWebpackOptions),
     new HtmlWebpackPlugin({
       template: path.resolve(src, 'index.pug')
     }),
