@@ -31,6 +31,10 @@ module.exports = {
     filename: '[name].[hash].bundle.js',
     path: resourcesFolder
   },
+  devServer: {
+    contentBase: projectRoot,
+    index: indexHtmlFile
+  },
   module: {
     rules: [{
       test: /\.scss$/,

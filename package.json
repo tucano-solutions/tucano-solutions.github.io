@@ -26,9 +26,9 @@
     "webpack-dev-server": "^2.10.1"
   },
   "scripts": {
-    "publish": "cd dev/ && webpack --config webpack.build.js",
-    "dev": "cd dev/ && webpack-dev-server --config webpack.dev.js",
-    "stage": "cd dev/ && webpack-dev-server --config webpack.build.js"
+    "publish": "webpack --config dev/webpack.build.js",
+    "dev": "webpack-dev-server --config dev/webpack.dev.js",
+    "stage": "webpack-dev-server --config dev/webpack.build.js"
   },
   "repository": {
     "type": "git",
